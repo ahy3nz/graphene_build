@@ -1,0 +1,15 @@
+; Include forcefield parameters
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/ffmix.itp"
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/molecules.itp"
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/ions.itp"
+
+[ system ]
+; Name
+bilayer with graphene and dna
+
+[ molecules ]
+; Compound	#mols
+DOPC 312
+CHL1 88
+GRA_5 1
+GACTGACTGA 4
