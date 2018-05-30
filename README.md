@@ -6,3 +6,5 @@ oriented in line with the bilayer normal, "corner first"
 Constructs a bilayer-dna-graphene-water-ion system with the graphene arbitrarily
 rotated via `graphene_rotations.py`. Corresponding MDP file also written
 based on the graphene rotation and angle of attack. 
+## Analysis  
+Some scripts for analyzing and visualizing these systems
