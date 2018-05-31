@@ -155,7 +155,7 @@ pull-ncoords = 1
 ;pull-coord1-start = No
 
 pull-group1-name = anchor2
-pull-coord1-groups = 0 2
+pull-coord1-groups = 0 1
 pull-coord1-type = umbrella
 pull-coord1-geometry =  direction-periodic
 pull-coord1-vec =  {:4.3f} {:4.3f} {:4.3f}
