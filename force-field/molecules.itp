@@ -1,0 +1,37 @@
+; ### DNA chains ###
+#include "polyG_10.itp"
+#include "GACTGACTGA.itp"
+
+; ### LIPIDS ###
+#include "DOPC.itp"
+#include "CHL1.itp"
+
+; ### WATER ###
+#include "TIP3.itp"
+
+; ### GRAPHENE SHEETS ###
+#include "GRA.itp"
+
+#include "GRA_5.itp"
+#ifdef POSRE_GRA_5
+#include "posre_GRA_5.itp"
+#endif
+
+#include "GR510.itp"
+#ifdef POSRE_GR510_CORNER
+#include "posre_GR510_corner.itp
+#endif
+
+#ifdef POSRE_GR510_MIDDLE
+#include "posre_GR510_middle.itp"
+#endif
+
+#ifdef POSRE_GR510_MIDDLE_1000
+#include "posre_GR510_middle_1000.itp"
+#endif
+
+#ifdef POSRE_GR510_ALL_1000
+#include "posre_GR510_all_1000.itp"
+#endif
+
+; # #include "DOPE.itp"
