@@ -49,8 +49,8 @@ gmx solvate -cp ${GF}/bilayer-graphene-dna.gro \
     -cs inputs/water.gro \
     -o ${GF}/bilayer-graphene-dna-water.gro \
     -p topol.top \
-    #-scale 0.57
-    -scale 1.2
+    -scale 0.57
+    #-scale 1.2
 
 # now need to add ions, but to do that you need a tpr file, so we need to run grompp
 export MDP='inputs/grompp.mdp'
@@ -58,7 +58,7 @@ export GRO=${GF}/bilayer-graphene-dna-water.gro
 export TOP='topol.top'
 export TPR=${GF}/'no-ions.tpr'
 # ignore warning about generating velocities
-gmx grompp -f ${MDP} -c ${GRO} -p ${TOP} -o ${TPR} -maxwarn 1
+gmx grompp -f ${MDP} -c ${GRO} -p ${TOP} -o ${TPR} -maxwarn 2
 
 # finally, add ions and re-grompp
 export TPR_IN='-s generated-files/no-ions.tpr'
