@@ -139,7 +139,7 @@ gen_temp                 = 300.0
 gen_seed                 = 69
 annealing = no
 
-pull = yes
+pull = no
 pull-nstxout = 100
 pull-nstfout = 100
 pull-ngroups = 1
