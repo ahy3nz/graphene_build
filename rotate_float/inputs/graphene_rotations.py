@@ -140,29 +140,7 @@ gen_seed                 = 69
 annealing = no
 
 pull = no
-pull-nstxout = 100
-pull-nstfout = 100
-pull-ngroups = 1
-pull-ncoords = 1
-;pull-group1-name = anchor1
-;pull-coord1-groups = 0 1
-;pull-coord1-type = umbrella
-;pull-coord1-geometry =  direction-periodic
-;pull-coord1-vec = {:4.3f} {:4.3f} {:4.3f} 
-;pull-coord1-origin = {:4.3f} {:4.3f} {:4.3f} 
-;pull-coord1-rate = 0
-;pull-coord1-k = 1000
-;pull-coord1-start = No
-
-pull-group1-name = anchor2
-pull-coord1-groups = 0 1
-pull-coord1-type = umbrella
-pull-coord1-geometry =  direction-periodic
-pull-coord1-vec =  {:4.3f} {:4.3f} {:4.3f}
-pull-coord1-origin = {:4.3f} {:4.3f} {:4.3f}
-pull-coord1-rate = 0
-pull-coord1-k = 1000
-pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2))
+pull-coord1-start = No""")
     
 
 if __name__ == "__main__":
