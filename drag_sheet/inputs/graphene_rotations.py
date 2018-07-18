@@ -174,11 +174,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--angle', dest='angle',type=float)
     parser.add_argument('--force', dest='force',type=float)
+    parser.add_argument('--gro', dest='gro',type=str)
     args = parser.parse_args()
-    cmpd = mb.load('graphene-dna-resized.gro')
-    traj = mdtraj.load('graphene-dna-resized.gro')
+    gro_file = args.gro
     angle_of_attack = args.angle
     force_constant = args.force
+    cmpd = mb.load(gro_file)
+    traj = mdtraj.load(gro_file)
+
     old_pos = cmpd.pos
     
     # Define vectors
