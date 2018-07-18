@@ -175,10 +175,12 @@ if __name__ == "__main__":
     parser.add_argument('--angle', dest='angle',type=float)
     parser.add_argument('--force', dest='force',type=float)
     parser.add_argument('--gro', dest='gro',type=str)
+    parser.add_argument('--out', dest='out',type=str)
     args = parser.parse_args()
     gro_file = args.gro
     angle_of_attack = args.angle
     force_constant = args.force
+    outgro = args.out
     cmpd = mb.load(gro_file)
     traj = mdtraj.load(gro_file)
 
@@ -201,7 +203,7 @@ if __name__ == "__main__":
     cmpd.translate_to(old_pos)
     for i in range(traj.n_atoms):
         traj.xyz[0,i] = cmpd.xyz[i]
-    traj.save('spun.gro')
+    traj.save(outgro)
     
     # Get pulling points and references for MDP file
     north = cmpd.xyz[0]
