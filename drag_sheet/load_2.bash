@@ -2,26 +2,12 @@
 export GF='generated-files'
 export ANGLE=45
 export FORCE=250
+
 mkdir -p ${GF}
-
-# make 2nd sheet for top
-gmx editconf -f inputs/dna.gro -rotate 0 0 180 -o ${GF}/dna-top2.gro
-gmx editconf -f ${GF}/dna-top2.gro -translate 6 6 0 -o ${GF}/dna-top2.gro
-
-gmx editconf -f inputs/dna.gro -rotate 0 0 180 -o ${GF}/dna-top3.gro
-gmx editconf -f ${GF}/dna-top3.gro -translate 3 3 0 -o ${GF}/dna-top3.gro
-
 
 # make 1st sheet for bottom
 gmx editconf -f inputs/dna.gro -rotate 180 0 0 -o ${GF}/dna-bottom1.gro
 gmx editconf -f ${GF}/dna-bottom1.gro -translate 0 6 6 -o ${GF}/dna-bottom1.gro
-
-# make 2nd sheet for bottom
-gmx editconf -f ${GF}/dna-bottom1.gro -rotate 0 0 180 -o ${GF}/dna-bottom2.gro
-gmx editconf -f ${GF}/dna-bottom2.gro -translate 6 6 0 -o ${GF}/dna-bottom2.gro
-
-gmx editconf -f ${GF}/dna-bottom1.gro -rotate 0 0 180 -o ${GF}/dna-bottom3.gro
-gmx editconf -f ${GF}/dna-bottom3.gro -translate 3 3 0 -o ${GF}/dna-bottom3.gro
 
 #
 ## combine the gro files
@@ -33,7 +19,7 @@ export IP='-ip inputs/positions.dat'
 export MOL='-nmol 1'
 export SC='-scale 0.00001'
 $GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
-for input in ${GF}/dna-top2.gro ${GF}/dna-top3.gro ${GF}/dna-bottom1.gro ${GF}/dna-bottom2.gro ${GF}/dna-bottom3.gro
+for input in ${GF}/dna-bottom1.gro 
 do
 $GIM -f $OUT -ci $input -o $OUT $MOL $ROT $DR $IP $SC
 done
@@ -50,6 +36,7 @@ gmx editconf -f ${GF}/graphene-dna-resized.gro -translate 0 0 2.5 \
 cd inputs
 python graphene_rotations.py --angle $ANGLE --force $FORCE
 cd ..
+
 # now move the sheet as necessary and insert into bilayer system
 $GIM -f inputs/bilayer-no-water.gro \
     -ci inputs/spun.gro \
