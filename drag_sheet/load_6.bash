@@ -1,5 +1,7 @@
 # keep generated files in a separate directory
 export GF='generated-files'
+export ANGLE=45
+export FORCE=250
 mkdir -p ${GF}
 
 # make 2nd sheet for top
@@ -45,6 +47,9 @@ gmx editconf -f ${GF}/graphene-dna-resized.gro -rotate 90 45 45 \
 gmx editconf -f ${GF}/graphene-dna-resized.gro -translate 0 0 2.5 \
     -o ${GF}/graphene-dna-resized.gro
 
+cd inputs
+python graphene_rotations.py --angle $ANGLE --force $FORCE
+cd ..
 # now move the sheet as necessary and insert into bilayer system
 $GIM -f inputs/bilayer-no-water.gro \
     -ci inputs/spun.gro \
