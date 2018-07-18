@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 import mbuild as mb
 import mdtraj
 import pdb
@@ -171,9 +172,9 @@ pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2, k))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--angle', dest='angle', action='store_const',const=0)
-    parser.add_argument('--force', dest='force', action='store_const',const=500)
-    args=  parser.parse_args(['--angle', '--force'])
+    parser.add_argument('--angle', dest='angle',type=float)
+    parser.add_argument('--force', dest='force',type=float)
+    args = parser.parse_args()
     cmpd = mb.load('graphene-dna-resized.gro')
     traj = mdtraj.load('graphene-dna-resized.gro')
     angle_of_attack = args.angle
