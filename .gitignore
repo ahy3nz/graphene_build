@@ -1,4 +1,5 @@
-generated-files/*
+drag_sheet/generated-files/*
+free_float/generated-files/*
 *.xtc
 *.log
 *.edr
