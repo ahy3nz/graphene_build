@@ -2,6 +2,7 @@ import numpy as np
 import mbuild as mb
 import mdtraj
 import pdb
+import argparse
 
 ###########################
 ## This code is intended to transform the graphene + dna structure
@@ -71,7 +72,8 @@ def calculate_pull_pts(point1, point2,  bilayer_center=3.26):
 
     return ns_vector, anchor1, anchor2
 
-def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp'):
+def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp',
+                    k=500):
     """ Write pulling mdp for this angle 
 
     Parameters
@@ -79,6 +81,8 @@ def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp'):
     pull_vec : 3-tuple
     anchor1 : 3-tuple
     anchor2 : 3-tuple
+    k : float, 
+        Spring constant
     """
 
     with open('{}'.format(filename), 'w') as f:
@@ -161,14 +165,19 @@ pull-coord1-geometry =  direction-periodic
 pull-coord1-vec =  {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-origin = {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-rate = 0
-pull-coord1-k = 1000
-pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2))
+pull-coord1-k = {}
+pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2, k))
     
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--angle', dest='angle', action='store_const',const=0)
+    parser.add_argument('--force', dest='force', action='store_const',const=500)
+    args=  parser.parse_args(['--angle', '--force'])
     cmpd = mb.load('graphene-dna-resized.gro')
     traj = mdtraj.load('graphene-dna-resized.gro')
-    angle_of_attack = 45
+    angle_of_attack = args.angle
+    force_constant = args.force
     old_pos = cmpd.pos
     
     # Define vectors
@@ -197,6 +206,6 @@ if __name__ == "__main__":
                                                     bilayer_center=3.26)
     
     # Write the mdp file 
-    write_pull_mdp(pull_vec, anchor1, anchor2)
+    write_pull_mdp(pull_vec, anchor1, anchor2,k=force_constant)
 
 
