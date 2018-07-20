@@ -1,13 +1,20 @@
 # keep generated files in a separate directory
 export GF='generated-files'
 export ANGLE=45
-export FORCE=250
+export FORCE=1000
+export output_dir='2_dna/k1000_45_c'
 
+export correct_top='2_dna.top'
+mkdir -p ${output_dir}
 mkdir -p ${GF}
+
+# make 2nd sheet for top
 
 # make 1st sheet for bottom
 gmx editconf -f inputs/dna.gro -rotate 180 0 0 -o ${GF}/dna-bottom1.gro
 gmx editconf -f ${GF}/dna-bottom1.gro -translate 0 6 6 -o ${GF}/dna-bottom1.gro
+
+# make 2nd sheet for bottom
 
 #
 ## combine the gro files
@@ -19,7 +26,7 @@ export IP='-ip inputs/positions.dat'
 export MOL='-nmol 1'
 export SC='-scale 0.00001'
 $GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
-for input in ${GF}/dna-bottom1.gro 
+for input in  ${GF}/dna-bottom1.gro 
 do
 $GIM -f $OUT -ci $input -o $OUT $MOL $ROT $DR $IP $SC
 done
@@ -34,17 +41,17 @@ gmx editconf -f ${GF}/graphene-dna-resized.gro -translate 0 0 2.5 \
     -o ${GF}/graphene-dna-resized.gro
 
 cd inputs
-python graphene_rotations.py --angle $ANGLE --force $FORCE
+python graphene_rotations.py --angle $ANGLE --force $FORCE --gro ../${GF}/graphene-dna-resized.gro --out ../${GF}/spun.gro
 cd ..
-
 # now move the sheet as necessary and insert into bilayer system
 $GIM -f inputs/bilayer-no-water.gro \
-    -ci inputs/spun.gro \
+    -ci ${GF}/spun.gro \
     -o ${GF}/bilayer-graphene-dna.gro \
     $ROT $MOL $DR $IP $SC
 
 # add water; copy the topol file incase we need to run again
-cp inputs/topol-bilayer-graphene-dna.top topol.top
+#cp inputs/topol-bilayer-graphene-dna.top topol.top
+cp inputs/${correct_top} topol.top
 gmx solvate -cp ${GF}/bilayer-graphene-dna.gro \
     -cs inputs/water.gro \
     -o ${GF}/bilayer-graphene-dna-water.gro \
@@ -82,3 +89,5 @@ gmx grompp -f ${MDP} -c ${GF}/bilayer-graphene-dna-water-ions.gro ${TOP} -o ${TP
 # remove old backup files
 rm \#*
 rm ${GF}/\#*
+cp inputs/angled_insertion.mdp .
+cp *.* ${output_dir}
