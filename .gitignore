@@ -4,4 +4,7 @@ free_float/generated-files/*
 *.log
 *.edr
 *.trr
-
+drag_sheet/0_dna/*
+drag_sheet/2_dna/*
+drag_sheet/4_dna/*
+drag_sheet/6_dna/*
