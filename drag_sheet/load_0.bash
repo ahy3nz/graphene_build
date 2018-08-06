@@ -1,8 +1,8 @@
 # keep generated files in a separate directory
 export GF='generated-files'
 export ANGLE=45
-export FORCE=1000
-export output_dir='0_dna/k1000_45_c'
+export FORCE=250
+export output_dir='0_dna/k250_0_a'
 
 export correct_top='0_dna.top'
 mkdir -p ${output_dir}
@@ -17,13 +17,14 @@ mkdir -p ${GF}
 #
 ## combine the gro files
 export GIM='gmx insert-molecules'
-export OUT='generated-files/graphene-dna.gro'
+export OUT='inputs/sheet.gro'
+#export OUT='generated-files/graphene-dna.gro'
 export ROT='-rot none'
 export DR='-dr 0.0'
 export IP='-ip inputs/positions.dat'
 export MOL='-nmol 1'
 export SC='-scale 0.00001'
-$GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
+#$GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
 #for input in  ${GF}/dna-bottom1.gro 
 #do
 #$GIM -f $OUT -ci $input -o $OUT $MOL $ROT $DR $IP $SC
@@ -32,7 +33,7 @@ $GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
 # at this point we have the gnf-dna complex, now we need to add it to the bilayer
 # but first, we need to change the box size of the gnf-dna complex to match the bilayer
 bilayer_box=`tail -n 1 inputs/bilayer-no-water.gro | awk '{print $1, $2, $3'}`
-gmx editconf -f ${GF}/graphene-dna.gro -box ${bilayer_box} -o ${GF}/graphene-dna-resized.gro
+gmx editconf -f inputs/sheet.gro -box ${bilayer_box} -o ${GF}/graphene-dna-resized.gro
 gmx editconf -f ${GF}/graphene-dna-resized.gro -rotate 90 45 45 \
     -o ${GF}/graphene-dna-resized.gro -c
 gmx editconf -f ${GF}/graphene-dna-resized.gro -translate 0 0 2.5 \

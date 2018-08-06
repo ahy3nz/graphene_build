@@ -1,8 +1,8 @@
 # keep generated files in a separate directory
 export GF='generated-files'
-export ANGLE=0
-export FORCE=250
-export output_dir='4_dna/k250_0_a'
+export ANGLE=45
+export FORCE=1000
+export output_dir='4_dna/k1000_45_c'
 
 export correct_top='4_dna.top'
 mkdir -p ${output_dir}

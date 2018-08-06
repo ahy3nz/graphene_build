@@ -2,6 +2,9 @@ import subprocess
 
 import itertools
 
+### this is a [bad] wrapper around the load_0.bash just so i can use itertools
+### to make this load_2, load_4, or load_6, modify the _exec_bash my_command
+
 def main():
     angles = ['0', '15', '30', '45']
     forces = ['250', '500', '1000']
