@@ -1,7 +1,9 @@
 import numpy as np
+import sys
 import mbuild as mb
 import mdtraj
 import pdb
+import argparse
 
 ###########################
 ## This code is intended to transform the graphene + dna structure
@@ -71,7 +73,8 @@ def calculate_pull_pts(point1, point2,  bilayer_center=3.26):
 
     return ns_vector, anchor1, anchor2
 
-def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp'):
+def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp',
+                    k=500):
     """ Write pulling mdp for this angle 
 
     Parameters
@@ -79,6 +82,8 @@ def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp'):
     pull_vec : 3-tuple
     anchor1 : 3-tuple
     anchor2 : 3-tuple
+    k : float, 
+        Spring constant
     """
 
     with open('{}'.format(filename), 'w') as f:
@@ -161,14 +166,24 @@ pull-coord1-geometry =  direction-periodic
 pull-coord1-vec =  {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-origin = {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-rate = 0
-pull-coord1-k = 1000
-pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2))
+pull-coord1-k = {}
+pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2, k))
     
 
 if __name__ == "__main__":
-    cmpd = mb.load('graphene-dna-resized.gro')
-    traj = mdtraj.load('graphene-dna-resized.gro')
-    angle_of_attack = 45
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--angle', dest='angle',type=float)
+    parser.add_argument('--force', dest='force',type=float)
+    parser.add_argument('--gro', dest='gro',type=str)
+    parser.add_argument('--out', dest='out',type=str)
+    args = parser.parse_args()
+    gro_file = args.gro
+    angle_of_attack = args.angle
+    force_constant = args.force
+    outgro = args.out
+    cmpd = mb.load(gro_file)
+    traj = mdtraj.load(gro_file)
+
     old_pos = cmpd.pos
     
     # Define vectors
@@ -188,7 +203,7 @@ if __name__ == "__main__":
     cmpd.translate_to(old_pos)
     for i in range(traj.n_atoms):
         traj.xyz[0,i] = cmpd.xyz[i]
-    traj.save('spun.gro')
+    traj.save(outgro)
     
     # Get pulling points and references for MDP file
     north = cmpd.xyz[0]
@@ -197,6 +212,6 @@ if __name__ == "__main__":
                                                     bilayer_center=3.26)
     
     # Write the mdp file 
-    write_pull_mdp(pull_vec, anchor1, anchor2)
+    write_pull_mdp(pull_vec, anchor1, anchor2,k=force_constant)
 
 
