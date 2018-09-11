@@ -6,55 +6,59 @@ import itertools
 ### to make this load_2, load_4, or load_6, modify the _exec_bash my_command
 
 def main():
-    angles = ['0', '15', '30', '45']
-    forces = ['250', '500', '1000']
+    angles = ['15','30', '45']
+    #angles = ['0', '15', '30', '45']
+    forces = ['125']
+    #forces = ['250', '500', '1000']
+
     trials = ['a', 'b', 'c']
     for angle, force in itertools.product(angles,forces):
         for trial in trials:
-            output_dir = '0_dna/k{0}_{1}_{2}'.format(force, angle, trial)
-            correct_top = '0_dna.top'
+            output_dir = '2_dna/k{0}_{1}_{2}'.format(force, angle, trial)
+            correct_top = '2_dna.top'
             GF = 'generated-files'
             _exec_bash(GF, angle, force, output_dir, correct_top)
 
 
 def _exec_bash(GF, angle, force, output_dir, correct_top):
     my_command = """
-# keep generated files in a separate directory
-export GF='{GF}'
-export ANGLE='{angle}'
-export FORCE='{force}'
-export output_dir='{output_dir}'
+export GF={GF}
+export ANGLE={angle}
+export FORCE={force}
+export output_dir={output_dir}
 
-export correct_top='{correct_top}'
+export correct_top={correct_top}
 mkdir -p ${{output_dir}}
 mkdir -p ${{GF}}
 
-# make 2nd sheet for top
-
-# make 1st sheet for bottom
-
-# make 2nd sheet for bottom
+#
+#
+#
+## make 1st sheet for bottom
+gmx editconf -f inputs/dna.gro -rotate 180 0 0 -o ${{GF}}/dna-bottom1.gro
+gmx editconf -f ${{GF}}/dna-bottom1.gro -translate 0 6 6 -o ${{GF}}/dna-bottom1.gro
+#
 
 #
 ## combine the gro files
 export GIM='gmx insert-molecules'
-export OUT='inputs/sheet.gro'
-#export OUT='generated-files/graphene-dna.gro'
+export OUT='generated-files/graphene-dna.gro'
 export ROT='-rot none'
 export DR='-dr 0.0'
 export IP='-ip inputs/positions.dat'
 export MOL='-nmol 1'
 export SC='-scale 0.00001'
-#$GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
-#for input in  ${{GF}}/dna-bottom1.gro 
-#do
-#$GIM -f $OUT -ci $input -o $OUT $MOL $ROT $DR $IP $SC
-#done
+$GIM -f inputs/sheet.gro -ci inputs/dna.gro -o $OUT $MOL $ROT $DR $IP $SC
+#for input in ${GF}/dna-top2.gro ${GF}/dna-bottom1.gro ${GF}/dna-bottom2.gro ${GF}/dna-bottom3.gro
+for input in ${{GF}}/dna-bottom1.gro  
+do
+$GIM -f $OUT -ci $input -o $OUT $MOL $ROT $DR $IP $SC
+done
 
 # at this point we have the gnf-dna complex, now we need to add it to the bilayer
 # but first, we need to change the box size of the gnf-dna complex to match the bilayer
 bilayer_box=`tail -n 1 inputs/bilayer-no-water.gro | awk '{{print $1, $2, $3'}}`
-gmx editconf -f inputs/sheet.gro -box ${{bilayer_box}} -o ${{GF}}/graphene-dna-resized.gro
+gmx editconf -f ${{GF}}/graphene-dna.gro -box ${{bilayer_box}} -o ${{GF}}/graphene-dna-resized.gro
 gmx editconf -f ${{GF}}/graphene-dna-resized.gro -rotate 90 45 45 \
     -o ${{GF}}/graphene-dna-resized.gro -c
 gmx editconf -f ${{GF}}/graphene-dna-resized.gro -translate 0 0 2.5 \
@@ -108,7 +112,7 @@ gmx grompp -f ${{MDP}} -c ${{GF}}/bilayer-graphene-dna-water-ions.gro ${{TOP}} -
 
 # remove old backup files
 rm \#*
-rm ${{GF}}/\#*
+rm ${{GF}}/*
 cp inputs/angled_insertion.mdp .
 cp *.* ${{output_dir}}
 """.format(**locals())
