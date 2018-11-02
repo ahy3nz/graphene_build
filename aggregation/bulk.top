@@ -1,0 +1,13 @@
+; Include forcefield parameters
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/ffmix.itp"
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/molecules.itp"
+#include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/ions.itp" 
+
+[ system ]
+mBuild Bilayer System
+
+[ molecules ]
+GRA_5    1
+DOPC     100
+CHL1     100
+SOL      1000
