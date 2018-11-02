@@ -89,7 +89,8 @@ def write_pull_mdp(pull_vec, anchor1, anchor2, filename='angled_insertion.mdp',
     with open('{}'.format(filename), 'w') as f:
         f.write("""integrator               = md
 dt                       = 0.001
-nsteps                   = 1000000 ; 1e6 steps * 1e-3 fs/step = 1e3 ps = 1 ns
+nsteps                   = 5000000 ; 5e6 steps * 1e-3 fs/step = 5e3 ps = 5 ns
+;nsteps                   = 1000000 ; 1e6 steps * 1e-3 fs/step = 1e3 ps = 1 ns
 comm-mode                = Linear
 nstcomm                  = 1000
 comm-grps                = System
