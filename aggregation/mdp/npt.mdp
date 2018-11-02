@@ -1,6 +1,7 @@
 integrator               = md
 dt                       = 0.001
-nsteps                   = 1000000
+;nsteps                   = 1000000 ; 1ns
+nsteps                   = 10000000 ; 10ns
 comm-mode                = Linear
 nstcomm                  = 1000
 comm-grps                = System
@@ -44,11 +45,11 @@ tau_t                    = 1.0
 ref_t                    = 300 
 
 pcoupl                   = Parrinello-Rahman
-pcoupltype               = semiisotropic
+pcoupltype               = isotropic
 nstpcouple               = -1
 tau-p                    = 10.0
-compressibility          = 4.5e-5 4.5e-5 
-ref-p                    = 1.01325 1.01325
+compressibility          = 4.5e-5 
+ref-p                    = 1.01325
 
 gen_vel                  = yes
 gen_temp                 = 300.0
