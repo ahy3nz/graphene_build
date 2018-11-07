@@ -18,7 +18,10 @@ header = """; Include forcefield parameters
 #include "/raid6/homes/ahy3nz/Trajectories/graphene_studies/graphene_files/force-field/ions.itp" """
 
 ingredients_folder = 'ingredients'
-out_folder = 'trial1'
+out_folder = 'trial6'
+p = subprocess.Popen('mkdir -p {}'.format(out_folder), shell=True,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+p.wait()
 
 box = [10, 10, 10]
 cmpd = mb.Compound()
@@ -63,7 +66,7 @@ with open('{0}/em.out'.format(out_folder), 'w') as log:
     p.wait()
 
 with open('{0}/npt.out'.format(out_folder), 'w') as log:
-    p = subprocess.Popen('gmx grompp -f mdp/npt.mdp -c {1}/em.gro '
+    p = subprocess.Popen('gmx grompp -f mdp/npt_anneal.mdp -c {1}/em.gro '
             '-p {0} -o {1}/npt -maxwarn 1'.format(outtop, out_folder),
             shell=True, stdout=log, stderr=log)
     p.wait()
