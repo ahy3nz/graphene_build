@@ -57,5 +57,5 @@ gen_seed                 = 69
 annealing               = single
 annealing-npoints       = 3
 annealing-time          = 0 20000 40000
-annealing-temp          = 300 400 300
+annealing-temp          = 300 360 300
 
