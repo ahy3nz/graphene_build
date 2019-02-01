@@ -45,10 +45,10 @@ mol modstyle ${rep} 0 DynamicBonds 1.6 0.7 12
 mol modmaterial ${rep} 0 AOChalky
 mol modcolor ${rep} 0 ColorID 16
 
-#DG
+#DNA strands (DG DA DC DT)
 mol addrep 0
 incr rep
-mol modselect ${rep} 0 {resname DG}
+mol modselect ${rep} 0 {resname DG DA DC DT}
 mol modstyle ${rep} 0 DynamicBonds 1.6 0.2 12
 mol modmaterial ${rep} 0 AOChalky
 mol modcolor ${rep} 0 ColorID 0
