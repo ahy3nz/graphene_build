@@ -1,0 +1,20 @@
+#!/bin/sh -l
+#PBS -N test
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=96:00:00
+#PBS -q low
+#PBS -m abe
+#PBS -M ayang41@gmail.com
+
+
+cd $PBS_O_WORKDIR
+echo `cat $PBS_NODEFILE`
+
+#module load gromacs/5.1.0
+#cd ~/Trajectories/JOBNAME
+#gmx mdrun -ntomp 8 -gpu_id 0 -pin on -pinoffset 0 -deffnm ~/Trajectories/JOBNAME/md_JOBNAME &
+#gmx mdrun -ntomp 8 -gpu_id 1 -pin on -pinoffset 8 -deffnm ~/Trajectories/JOBNAME/md_JOBNAME &
+#wait
+
+module load gromacs/2018.1
+gmx mdrun -ntomp 8 -gpu_id 0 -ntmpi 1 -deffnm test

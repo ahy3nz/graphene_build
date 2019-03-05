@@ -1,0 +1,19 @@
+# This file was created Tue Feb 26 19:44:37 2019
+# Created by:
+#                      :-) GROMACS - gmx mdrun, 2018.1 (-:
+# 
+# Executable:   /raid6/software/gromacs_2018.1//bin/gmx
+# Data prefix:  /raid6/software/gromacs_2018.1/
+# Working dir:  /raid6/homes/ahy3nz/Trajectories/charmm/polyg10/inputs/6dna/test
+# Command line:
+#   gmx mdrun -deffnm test
+# gmx mdrun is part of G R O M A C S:
+#
+# Gnomes, ROck Monsters And Chili Sauce
+#
+@    title "Pull force"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "Force (kJ/mol/nm)"
+@TYPE xy
+0.0000	3176
+0.1000	3156.27
