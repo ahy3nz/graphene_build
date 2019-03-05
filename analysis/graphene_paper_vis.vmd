@@ -1,0 +1,54 @@
+display resize 1150 700
+display ambientocclusion on
+display aoambient 0.7
+display aodirect 0.7
+
+rotate x by 90
+scale by 1.5
+
+pbc join res -ref "index 50031" -sel "resname GRA_5" -all
+pbc join fragment -bondlist -sel "resname DOPC" -all
+pbc join fragment -bondlist -sel "resname CHL1" -all
+pbc join fragment -bondlist -sel "resname DG" -all
+
+mol delrep 0 0
+set rep 0
+
+# DOPC
+mol addrep 0
+mol modselect ${rep} 0 {resname DOPC and backbonetype normal}
+mol modstyle ${rep} 0 DynamicBonds 1.6 0.2 12
+mol modmaterial ${rep} 0 AOChalky
+mol modcolor ${rep} 0 ColorID 2
+
+#P
+mol addrep 0
+incr rep
+mol modselect ${rep} 0 {name P and resname DOPC}
+mol modstyle ${rep} 0 VDW 0.9 12
+mol modmaterial ${rep} 0 AOChalky
+mol modcolor ${rep} 0 ColorID 4
+
+#CHOL
+mol addrep 0
+incr rep
+mol modselect ${rep} 0 {resname CHL1 and backbonetype normal}
+mol modstyle ${rep} 0 DynamicBonds 1.6 0.2 12
+mol modmaterial ${rep} 0 AOChalky
+mol modcolor ${rep} 0 ColorID 7
+
+#GRA
+mol addrep 0
+incr rep
+mol modselect ${rep} 0 {resname GRA_5}
+mol modstyle ${rep} 0 DynamicBonds 1.6 0.7 12
+mol modmaterial ${rep} 0 AOChalky
+mol modcolor ${rep} 0 ColorID 16
+
+#DNA strands (DG DA DC DT)
+mol addrep 0
+incr rep
+mol modselect ${rep} 0 {resname DG DA DC DT}
+mol modstyle ${rep} 0 DynamicBonds 1.6 0.2 12
+mol modmaterial ${rep} 0 AOChalky
+mol modcolor ${rep} 0 ColorID 0
