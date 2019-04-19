@@ -1,0 +1,46 @@
+REMARK  GENERATE LIGAND                                                               
+REMARK   DATE:     4/17/19     10:46: 7      CREATED BY USER: apache                  
+ATOM      1  S   SDS S   1      -5.474   4.236  -0.965  1.00  0.00      SDS 
+ATOM      2  OS1 SDS S   1      -5.098   3.795   0.498  1.00  0.00      SDS 
+ATOM      3  OS2 SDS S   1      -6.924   4.172  -1.003  1.00  0.00      SDS 
+ATOM      4  OS3 SDS S   1      -4.953   5.588  -1.053  1.00  0.00      SDS 
+ATOM      5  OS4 SDS S   1      -4.822   3.307  -1.875  1.00  0.00      SDS 
+ATOM      6  C1  SDS S   1      -4.974   2.386   0.648  1.00  0.00      SDS 
+ATOM      7  H11 SDS S   1      -4.127   1.996   0.032  1.00  0.00      SDS 
+ATOM      8  H12 SDS S   1      -5.914   1.861   0.351  1.00  0.00      SDS 
+ATOM      9  C2  SDS S   1      -4.663   2.031   2.106  1.00  0.00      SDS 
+ATOM     10  H21 SDS S   1      -5.494   2.370   2.763  1.00  0.00      SDS 
+ATOM     11  H22 SDS S   1      -3.736   2.556   2.427  1.00  0.00      SDS 
+ATOM     12  C3  SDS S   1      -4.470   0.519   2.252  1.00  0.00      SDS 
+ATOM     13  H31 SDS S   1      -3.646   0.196   1.575  1.00  0.00      SDS 
+ATOM     14  H32 SDS S   1      -5.399   0.004   1.916  1.00  0.00      SDS 
+ATOM     15  C4  SDS S   1      -4.143   0.091   3.680  1.00  0.00      SDS 
+ATOM     16  H41 SDS S   1      -4.967   0.410   4.358  1.00  0.00      SDS 
+ATOM     17  H42 SDS S   1      -3.210   0.599   4.013  1.00  0.00      SDS 
+ATOM     18  C5  SDS S   1      -3.960  -1.422   3.784  1.00  0.00      SDS 
+ATOM     19  H51 SDS S   1      -3.136  -1.743   3.107  1.00  0.00      SDS 
+ATOM     20  H52 SDS S   1      -4.891  -1.932   3.449  1.00  0.00      SDS 
+ATOM     21  C6  SDS S   1      -3.636  -1.848   5.212  1.00  0.00      SDS 
+ATOM     22  H61 SDS S   1      -4.460  -1.528   5.889  1.00  0.00      SDS 
+ATOM     23  H62 SDS S   1      -2.704  -1.339   5.547  1.00  0.00      SDS 
+ATOM     24  C7  SDS S   1      -3.454  -3.358   5.316  1.00  0.00      SDS 
+ATOM     25  H71 SDS S   1      -2.629  -3.680   4.640  1.00  0.00      SDS 
+ATOM     26  H72 SDS S   1      -4.386  -3.868   4.982  1.00  0.00      SDS 
+ATOM     27  C8  SDS S   1      -3.131  -3.780   6.745  1.00  0.00      SDS 
+ATOM     28  H81 SDS S   1      -3.955  -3.457   7.421  1.00  0.00      SDS 
+ATOM     29  H82 SDS S   1      -2.199  -3.268   7.079  1.00  0.00      SDS 
+ATOM     30  C9  SDS S   1      -2.948  -5.290   6.852  1.00  0.00      SDS 
+ATOM     31  H91 SDS S   1      -2.124  -5.609   6.174  1.00  0.00      SDS 
+ATOM     32  H92 SDS S   1      -3.880  -5.798   6.516  1.00  0.00      SDS 
+ATOM     33  C10 SDS S   1      -2.625  -5.710   8.283  1.00  0.00      SDS 
+ATOM     34 H101 SDS S   1      -3.450  -5.381   8.954  1.00  0.00      SDS 
+ATOM     35 H102 SDS S   1      -1.695  -5.194   8.613  1.00  0.00      SDS 
+ATOM     36  C11 SDS S   1      -2.439  -7.220   8.409  1.00  0.00      SDS 
+ATOM     37 H111 SDS S   1      -1.616  -7.540   7.729  1.00  0.00      SDS 
+ATOM     38 H112 SDS S   1      -3.371  -7.728   8.069  1.00  0.00      SDS 
+ATOM     39  C12 SDS S   1      -2.116  -7.640   9.841  1.00  0.00      SDS 
+ATOM     40 H121 SDS S   1      -2.939  -7.335  10.523  1.00  0.00      SDS 
+ATOM     41 H122 SDS S   1      -1.180  -7.147  10.182  1.00  0.00      SDS 
+ATOM     42 H123 SDS S   1      -1.985  -8.741   9.908  1.00  0.00      SDS 
+TER      43      SDS      1
+END
