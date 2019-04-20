@@ -194,7 +194,6 @@ def rotate_gnf_write_mdp(gro_file='composite.gro', angle_of_attack=0,
     
     # Update coordinates and save grofile via mdtraj
     cmpd.translate_to(old_pos)
-    print("Copying atoms over")
     #for i in range(traj.n_atoms):
         #pdb.set_trace()
     traj.xyz[0,:] = cmpd.xyz[:]
