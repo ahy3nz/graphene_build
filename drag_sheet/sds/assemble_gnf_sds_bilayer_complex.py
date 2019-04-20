@@ -41,6 +41,10 @@ for n_sds in sds_vals:
         # create index
         print("indexing ...")
         index_command = 'echo q | gmx make_ndx -f solvated_{}sds.gro'.format(n_sds)
+        p = subprocess.Popen(index_command, shell=True,
+                stdout=open('index.log', 'w'),
+                stderr=open('index.err', 'w'))
+        p.wait()
         with open('index.ndx', 'a') as f:
             f.write("\n[ anchor 2] \n")
             f.write('1007\n')
