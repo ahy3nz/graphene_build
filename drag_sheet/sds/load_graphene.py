@@ -66,13 +66,15 @@ def construct_system(dist_from_sheet=0.7, box_thickness=0.5, n_load_per_side=10,
     sys.spin(np.pi/2, [1,0,0]) # Do some rotations to get it corner first
     sys.spin(np.pi/4, [0,1,0])
     sys.translate_to(bilayer_center) # This is the bilayer center
-    sys.translate([0,0,7]) # Shift the loaded GNF up to be above the bialyer
+    sys.translate([0,0,6]) # Shift the loaded GNF up to be above the bialyer
 
     # For the sake of writing, we will be using a lot of mdtraj functionality
     traj = sys.to_trajectory(residues=['GRA_5', 'SDS', 'NA'])
     bilayer = mdtraj.load(os.path.join(PATH_TO_MOLECULES, 'bilayer.gro'))
     composite_traj = traj.stack(bilayer)
-    composite_traj.save('composite.gro')
+    composite_traj.unitcell_lengths = bilayer.unitcell_lengths
+    composite_traj.unitcell_lengths[0,2] = 13
+    composite_traj[0].save('composite.gro')
     write_gmx_topology('topol.top', composite_traj, header=header)
 
     # Use external module to perform rotations and write pulling MDP
@@ -91,6 +93,7 @@ def write_gmx_topology(outfile, composite_traj, header=""):
         f.write("\n".join(["{:<8s} {}".format(name, sum(1 for _ in g))
                           for name, g in groupby([c.name for c in 
                               composite_traj.topology.residues])]))
+        f.write("\n")
 
 if __name__ == "__main__":
     construct_system()
