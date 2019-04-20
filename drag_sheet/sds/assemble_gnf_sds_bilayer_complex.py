@@ -46,7 +46,7 @@ for n_sds in sds_vals:
                 stderr=open('index.err', 'w'))
         p.wait()
         with open('index.ndx', 'a') as f:
-            f.write("\n[ anchor 2] \n")
+            f.write("\n[ anchor2] \n")
             f.write('1007\n')
 
         # run EM
