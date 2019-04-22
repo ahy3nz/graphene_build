@@ -4,7 +4,8 @@ import glob
 import subprocess
 
 import load_graphene
-sds_vals = [10, 20, 30, 40, 50, 60] # number of SDS on both sides of graphene
+#sds_vals = [10, 20, 30, 40, 50, 60] # number of SDS on both sides of graphene
+sds_vals=[70,80]
 angles = ['0']
 trials = ['a', 'b', 'c']
 
@@ -28,7 +29,8 @@ for n_sds in sds_vals:
         # Write pulling mdp
         print(os.getcwd())
         print("constructing ...")
-        load_graphene.construct_system(n_load_per_side=int(n_sds/2))
+        load_graphene.construct_system(n_load_per_side=int(n_sds/2),
+                dist_from_sheet=0.2)
 
         # add water
         print("solvating ...")

@@ -54,11 +54,14 @@ def construct_system(dist_from_sheet=0.7, box_thickness=0.5, n_load_per_side=10,
     above_box = mb.Box(mins=np.min(gra.xyz, axis=0)+[0, 0, dist_from_sheet], 
                        maxs=np.max(gra.xyz, axis=0)+[0, 0, dist_from_sheet + box_thickness])
     fill_above = fill_box([sds, na], 
-            n_compounds=[n_load_per_side, n_load_per_side], box=above_box)
+            n_compounds=[n_load_per_side, n_load_per_side], box=above_box,
+            edge=0.1, overlap=0.1)
 
     below_box = mb.Box(mins=np.min(gra.xyz, axis=0)-[0, 0, dist_from_sheet + box_thickness], 
                        maxs=np.max(gra.xyz, axis=0)-[0, 0, dist_from_sheet])
-    fill_below = fill_box([sds, na], n_compounds=[n_load_per_side, n_load_per_side], box=below_box)
+    fill_below = fill_box([sds, na], 
+            n_compounds=[n_load_per_side, n_load_per_side], box=below_box,
+            edge=0.1, overlap=0.1)
 
     sys = mb.Compound()
     sys.add([gra, fill_above, fill_below])
