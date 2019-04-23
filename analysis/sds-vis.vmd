@@ -1,0 +1,82 @@
+#mol new generated-files/bilayer-graphene-dna-water-ions.gro
+#mol addfile traj_comp.xtc autobonds off waitfor all
+# Script to visualize and color the graphene-bilayer system
+
+axes location off
+display ambientocclusion on
+
+# alter materials
+material change ambient AOEdgy 0.110000
+material change diffuse AOEdgy 1.000000
+material change specular AOEdgy 0.040000
+material change shininess AOEdgy 0.000000
+material change opacity AOEdgy 1.000000
+material change outline AOEdgy 2.980000
+material change outlinewidth AOEdgy 0.540000
+material change transmode AOEdgy 0.000000
+
+# get rid of ugly cyan color for carbon
+color Element C gray
+
+menu graphics off
+menu graphics on
+
+
+mol delrep 0 0
+set rep 0
+
+# show DNA
+mol addrep top
+mol modselect ${rep} 0 "resname SDS"
+mol modstyle ${rep} 0 Licorice 0.3 20.0
+mol modmaterial ${rep} 0 AOEdgy
+#mol modcolor 0 0 ColorID 2
+
+# show ions
+incr rep
+mol addrep top
+mol modselect ${rep} 0 "resname NA"
+mol modstyle ${rep} 0 VDW 0.6 20.0
+mol modmaterial ${rep} 0 AOEdgy
+
+# graphene
+incr rep
+mol addrep top
+mol modselect ${rep} 0 {resname "GRA_5"}
+mol modstyle ${rep} 0 Lines 
+mol modmaterial ${rep} 0 AOEdgy
+mol modcolor ${rep} 0 ColorID 6
+
+# PC lipids
+incr rep
+mol addrep top
+mol modselect ${rep} 0 {resname ".*PC" and not hydrogen}
+mol modstyle ${rep} 0 Licorice 0.25 20.0
+mol modmaterial ${rep} 0 AOEdgy
+
+# chol
+incr rep
+mol addrep top
+mol modselect ${rep} 0 {resname "CHL1" and not hydrogen}
+mol modstyle ${rep} 0 Licorice 0.25 20.0
+mol modmaterial ${rep} 0 AOEdgy
+
+# water; off by default
+incr rep
+mol addrep top
+mol modselect ${rep} 0 {water}
+mol modstyle ${rep} 0 Lines
+mol modmaterial ${rep} 0 AOEdgy
+mol showrep 0 ${rep} 0
+
+#pbc box -color black
+
+display aoambient 0.700000
+display aodirect 0.700000
+material change outlinewidth AOEdgy 0.830000
+color Name C gray
+
+# remove intial frame since it's not what we actually start with and 
+# gromacs writes that to the trajectory anyway; just use the gro file 
+# for the topology information
+#animate delete beg 0 end 0
