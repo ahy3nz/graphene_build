@@ -142,7 +142,7 @@ ref-p                    = 1.01325 1.01325
 
 gen_vel                  = yes
 gen_temp                 = 300.0
-gen_seed                 = 69
+gen_seed                 = {}
 annealing = no
 
 pull = yes
@@ -168,7 +168,8 @@ pull-coord1-vec =  {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-origin = {:4.3f} {:4.3f} {:4.3f}
 pull-coord1-rate = 0
 pull-coord1-k = {}
-pull-coord1-start = No""".format(*pull_vec, *anchor1, *pull_vec, *anchor2, k))
+pull-coord1-start = No""".format(np.random.randint(100),
+        *pull_vec, *anchor1, *pull_vec, *anchor2, k))
     
 
 def rotate_gnf_write_mdp(gro_file='composite.gro', angle_of_attack=0,
