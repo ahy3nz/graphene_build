@@ -9,6 +9,9 @@
 ; ### Sodium Dodecyl Sulfate ###
 #include "SDS.itp"
 
+; ### Polyvinylpyrrolidone (20-mer)
+#include "PVP.itp"
+
 ; ### WATER ###
 #include "TIP3.itp"
 
