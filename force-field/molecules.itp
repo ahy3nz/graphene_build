@@ -6,6 +6,9 @@
 #include "DOPC.itp"
 #include "CHL1.itp"
 
+; ### Sodium Dodecyl Sulfate ###
+#include "SDS.itp"
+
 ; ### WATER ###
 #include "TIP3.itp"
 
