@@ -6,7 +6,8 @@ import json
 
 df = pd.DataFrame()
 curr_dir = os.getcwd()
-sds_folders = ['10sds', '20sds', '30sds', '40sds', '50sds', '60sds']
+sds_folders = ['10sds', '20sds', '30sds', '40sds', '50sds', 
+            '60sds', '70sds', '80sds', '90sds', '100sds']
 k_folders = ['k50']
 angle_folders = ['0']
 trials = ['a', 'b', 'c']

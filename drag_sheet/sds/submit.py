@@ -5,12 +5,12 @@ import script_utils
 from operations import submit_job, compute_work, compute_penetration
 from multiprocessing import Pool
 
-n_nodes = 4
+n_nodes = 2
 jobid = [None]*n_nodes
 i=0
 curr_dir = os.getcwd()
 #sds_folders = ['10sds', '20sds', '30sds', '40sds', '50sds', '60sds']
-sds_folders = ['70sds', '80sds']
+sds_folders = ['100sds']
 k_folders = ['k50']
 angle_folders = ['0']
 trials = ['a', 'b', 'c']
@@ -21,7 +21,7 @@ for combo in it.product(sds_folders, k_folders, angle_folders,trials):
         os.chdir(sim_dir)
         if os.path.isfile('pull.tpr') and not os.path.isfile('pull.gro'):
             cmd = 'cd {}\n'.format(sim_dir)
-            cmd += 'gmx mdrun -deffnm pull -ntomp 8 -ntmpi 2 -gpu_id 01\n'
+            cmd += 'gmx mdrun -deffnm pull -ntomp 8 -ntmpi 2 -gpu_id 01 -append -cpi pull_prev.cpt -pf pull_pullf.xvg -px pull_pullx.xvg \n'
             with open('pull.pbs', 'w') as f:
                 script_utils.write_rahman_script(f, jobname='{0}_{3}'.format(*combo),
                         body=cmd)
