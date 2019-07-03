@@ -1,0 +1,10 @@
+pbc join res -ref "index 50031" -sel "resname GRA_5" -now
+pbc join fragment -bondlist -sel "resname DG" -now
+pbc wrap -centersel "resname GRA_5" -center com  -now 
+
+set sel [atomselect top "resname GRA_5 or resname DG"]
+set sel2 [atomselect top "resname DG"]
+set sel3 [atomselect top "resname GRA_5"]
+measure sasa 2.75 $sel -restrict $sel2 -points sasapoints
+measure sasa 2.75 $sel3 -points sasapoints
+measure sasa 2.75 $sel -points sasapoints
